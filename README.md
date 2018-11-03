@@ -60,4 +60,4 @@ See the source for the full sets of solutions.
 
 ## References
 
-The Staff of the Computation Library (1945), _Tables of the modified Hankel function of order one-third and of their derivatives_, Harvard University Press.
+The Staff of the Computation Library (1945), _Tables of the modified Hankel function of order one-third and of their derivatives_. Cambridge, MA: Harvard University Press.
