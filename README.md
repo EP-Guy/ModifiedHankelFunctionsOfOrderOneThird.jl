@@ -12,6 +12,14 @@ From _Tables of the Modified Hankel Functions of Order One-Third and of their De
 > Its only singularity is an irregular singularity at infinity. The equation occurs in the description of simple cases of diffraction and of refraction of waves.
 > The general solution of [Stokes' equation] can be written in terms of Bessel functions of order one-third. The tabulation of these Bessel functions for complex arguments would make possible the computation of solutions of [Stokes' equation] for complex arguments. The direct tabulation of solutions of [Stokes' equation] should, however, be preferred to that of Bessel functions of order one-third. Unlike Bessel's equation, **[Stokes' equation] has no singularity in the finite complex plane and its solutions are single-valued**, whereas the Bessel functions of order one-third are not.  
 
+## Usage
+
+```julia
+using ModifiedHankelFunctionsOfOrderOneThird
+
+h1, h2, h1′, h2′ = modifiedhankel(z)
+```
+
 ## The functions _h₁_ and _h₂_
 
 An independent pair of solutions, valid for all values of _z_, is
@@ -25,12 +33,14 @@ and
 where ![k = (12)^\frac{1}{6} e^{\left(-\frac{\pi i}{6} \right)}](https://latex.codecogs.com/svg.latex?k%20%3D%20%2812%29%5E%5Cfrac%7B1%7D%7B6%7D%20e%5E%7B%5Cleft%28-%5Cfrac%7B%5Cpi%20i%7D%7B6%7D%20%5Cright%29%7D)
 
 The contours of integration _L₁_ and _L₂_ are
+
 ![contoursofintegration](contoursofintegration.svg)
+
 with π/6 < _w_ < π/2. We take _w_ = π/3.
 
 ## Solutions
 
-Two solution approaches are used. If `abs2(z) < 36`, a power series solution is used. Otherwise, an asymptotic expansion is performed because of floating point limitations in the power series.
+Two solution approaches are used. If `abs2(z) < 36`, a power series solution is used. Otherwise, an asymptotic expansion is performed because of floating point limits in the power series.
 
 ### Power series
 
@@ -46,7 +56,7 @@ where
 
 ### Asymptotic expansion
 
-The asymptotic expansions can be used to estimate _h₁_, _h₂_, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of to expressions of different forms which represent asymptotically the same integral function is an example of Stokes' phenomenon.
+The asymptotic expansions can be used to estimate _h₁_, _h₂_, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
 
 The expansion for _h₁_ for -2π/3 < arg _z_ < 4π/3 is
 
