@@ -1,6 +1,6 @@
 # Modified Hankel Functions Of Order One Third and Their Derivatives
 
-[![Build Status](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.svg?branch=master)](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird)
+[![Build Status](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.svg?branch=master)](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird) [![Build status](https://ci.appveyor.com/api/projects/status/w115vkl46t4nj4ui?svg=true)](https://ci.appveyor.com/project/EP-Guy/modifiedhankelfunctionsoforderonethird)
 
 
 Solutions to Stokes' differential equation:
