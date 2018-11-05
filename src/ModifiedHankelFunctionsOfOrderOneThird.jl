@@ -53,9 +53,7 @@ function modifiedhankel(z)
         h1, h2, h1p, h2p = powerseries(z)
     else
         # Asymptotic expansion
-        h1, h2 = asymptotic(z)
-        h1p = zero(z)
-        h2p = zero(z)
+        h1, h2, h1p, h2p = asymptotic(z)
     end
 
     return h1, h2, h1p, h2p
