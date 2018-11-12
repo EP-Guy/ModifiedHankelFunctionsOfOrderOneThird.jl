@@ -85,12 +85,12 @@ function powerseries(z)
 
     zterm = z^3
     zpow = one(z)
-    for i = 1:numterms
+    @inbounds for i = 1:numterms
         zpow *= zterm  # for z^(3i)
-        @inbounds fval += avec[i+1]*zpow
-        @inbounds gval += bvec[i+1]*zpow
-        @inbounds f′val += cvec[i+1]*zpow
-        @inbounds g′val += dvec[i+1]*zpow
+        fval += avec[i+1]*zpow
+        gval += bvec[i+1]*zpow
+        f′val += cvec[i+1]*zpow
+        g′val += dvec[i+1]*zpow
     end
     gval *= z
     f′val *= -z^2
@@ -169,12 +169,12 @@ function asymptotic(z)
     t = one(z)
     sp = zero(z)
     tp = zero(z)
-    for i = 1:numterms
+    @inbounds for i = 1:numterms
         zpower *= zterm
         negative_zpower *= negative_zterm
 
-        @inbounds tmp1 = Cvec[i]*negative_zpower
-        @inbounds tmp2 = Cvec[i]*zpower
+        tmp1 = Cvec[i]*negative_zpower
+        tmp2 = Cvec[i]*zpower
 
         s += tmp1
         t += tmp2
