@@ -72,34 +72,32 @@ See also: [modifiedhankel](@ref), [asymptotic](@ref)
 """
 function powerseries(z)
     # Auxiliary functions
-    fval = zero(z)
-    gval = zero(z)
-    f′val = zero(z)
-    g′val = zero(z)
-
     # The zeroth terms (a₀, b₀, c₀, d₀)
-    fval += avec[1]
-    gval += bvec[1]
-    f′val += cvec[1]
-    g′val += dvec[1]
+    fval = oftype(z, avec[1])
+    gval = oftype(z, bvec[1])
+    f′val = oftype(z, cvec[1])
+    g′val = oftype(z, dvec[1])
 
     zterm = z^3
     zpow = one(z)
-    for i = 1:numterms
+    @inbounds for i = 2:numterms
         zpow *= zterm  # for z^(3i)
-        @inbounds fval += avec[i+1]*zpow
-        @inbounds gval += bvec[i+1]*zpow
-        @inbounds f′val += cvec[i+1]*zpow
-        @inbounds g′val += dvec[i+1]*zpow
+        fval += avec[i]*zpow
+        gval += bvec[i]*zpow
+        f′val += cvec[i]*zpow
+        g′val += dvec[i]*zpow
     end
     gval *= z
     f′val *= -z^2
 
     isqrt3over3 = im*sqrt(3)/3
-    h1 = gval + isqrt3over3*(gval - 2fval)
-    h2 = gval - isqrt3over3*(gval - 2fval)
-    h1p = g′val + isqrt3over3*(g′val - 2f′val)
-    h2p = g′val - isqrt3over3*(g′val - 2f′val)
+    k1 = isqrt3over3*(gval - 2fval)
+    k2 = isqrt3over3*(g′val - 2f′val)
+
+    h1 = gval + k1
+    h2 = gval - k1
+    h1p = g′val + k2
+    h2p = g′val - k2
 
     return h1, h2, h1p, h2p
 end
@@ -169,37 +167,42 @@ function asymptotic(z)
     t = one(z)
     sp = zero(z)
     tp = zero(z)
-    for i = 1:numterms
+    @inbounds for i = 1:numterms
         zpower *= zterm
         negative_zpower *= negative_zterm
 
-        @inbounds tmp1 = Cvec[i]*negative_zpower
-        @inbounds tmp2 = Cvec[i]*zpower
+        tmp1 = Cvec[i]*negative_zpower
+        tmp2 = Cvec[i]*zpower
 
         s += tmp1
         t += tmp2
         sp += tmp1*i
         tp += tmp2*i
     end
-    sp *= -3/2*zterm/z  # -3/2*im*z^(-5/2)
-    tp *= -3/2*zterm/z  # yes, same for both
+    k1 = -3/2*zterm/z  # -3/2*im*z^(-5/2)
+    sp *= k1
+    tp *= k1  # yes, same for both
 
     tmp1 = α/sqrt(rootz)  # α*z^(-1/4)
-    tmp2 = 2/3*im*rootz_cubed - 5π*im/12
-    tmp3 = 2/3*im*rootz_cubed + 11π*im/12
+    k2 = 2/3*im*rootz_cubed
+    tmp2 = k2 - 5π*im/12
+    tmp3 = k2 + 11π*im/12
+    k3 = 1/4/z
 
-    h1 = exp(tmp2)*s
-    h2 = exp(-tmp2)*t
-    h1p = exp(tmp2)*(s*(im*rootz - 1/4/z) + sp) # rootz*z^(-1/4) = z^(1/4)
-    h2p = exp(-tmp2)*(t*(-im*rootz - 1/4/z) + tp)
+    e2 = exp(tmp2)  # exp(-tmp2) = 1/exp(tmp3)
+    h1 = e2*s
+    h2 = t/e2
+    h1p = e2*(s*(im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
+    h2p = (t*(-im*rootz - k3) + tp)/e2
 
+    e3 = exp(tmp3)  # exp(-tmp3) = 1/exp(tmp3)
     argz = angle(z)
     if -4π/3 < argz < 0
-        h1 += exp(-tmp3)*t
-        h1p += exp(-tmp3)*(t*(-im*rootz - 1/4/z) + tp)
+        h1 += t/e3
+        h1p += (t*(-im*rootz - k3) + tp)/e3
     else
-        h2 += exp(tmp3)*s
-        h2p += exp(tmp3)*(s*(im*rootz - 1/4/z) + sp)
+        h2 += e3*s
+        h2p += e3*(s*(im*rootz - k3) + sp)
     end
 
     h1 *= tmp1
