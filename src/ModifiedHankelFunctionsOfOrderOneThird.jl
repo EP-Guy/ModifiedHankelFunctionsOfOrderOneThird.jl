@@ -72,16 +72,11 @@ See also: [modifiedhankel](@ref), [asymptotic](@ref)
 """
 function powerseries(z)
     # Auxiliary functions
-    fval = zero(z)
-    gval = zero(z)
-    f′val = zero(z)
-    g′val = zero(z)
-
     # The zeroth terms (a₀, b₀, c₀, d₀)
-    fval += avec[1]
-    gval += bvec[1]
-    f′val += cvec[1]
-    g′val += dvec[1]
+    fval = oftype(z, avec[1])
+    gval = oftype(z, bvec[1])
+    f′val = oftype(z, cvec[1])
+    g′val = oftype(z, dvec[1])
 
     zterm = z^3
     zpow = one(z)
@@ -96,10 +91,13 @@ function powerseries(z)
     f′val *= -z^2
 
     isqrt3over3 = im*sqrt(3)/3
-    h1 = gval + isqrt3over3*(gval - 2fval)
-    h2 = gval - isqrt3over3*(gval - 2fval)
-    h1p = g′val + isqrt3over3*(g′val - 2f′val)
-    h2p = g′val - isqrt3over3*(g′val - 2f′val)
+    k1 = isqrt3over3*(gval - 2fval)
+    k2 = isqrt3over3*(g′val - 2f′val)
+
+    h1 = gval + k1
+    h2 = gval - k1
+    h1p = g′val + k2
+    h2p = g′val - k2
 
     return h1, h2, h1p, h2p
 end
