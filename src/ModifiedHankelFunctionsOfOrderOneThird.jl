@@ -80,12 +80,12 @@ function powerseries(z)
 
     zterm = z^3
     zpow = one(z)
-    @inbounds for i = 1:numterms
+    @inbounds for i = 2:numterms
         zpow *= zterm  # for z^(3i)
-        fval += avec[i+1]*zpow
-        gval += bvec[i+1]*zpow
-        f′val += cvec[i+1]*zpow
-        g′val += dvec[i+1]*zpow
+        fval += avec[i]*zpow
+        gval += bvec[i]*zpow
+        f′val += cvec[i]*zpow
+        g′val += dvec[i]*zpow
     end
     gval *= z
     f′val *= -z^2
