@@ -179,25 +179,30 @@ function asymptotic(z)
         sp += tmp1*i
         tp += tmp2*i
     end
-    sp *= -3/2*zterm/z  # -3/2*im*z^(-5/2)
-    tp *= -3/2*zterm/z  # yes, same for both
+    k1 = -3/2*zterm/z  # -3/2*im*z^(-5/2)
+    sp *= k1
+    tp *= k1  # yes, same for both
 
     tmp1 = α/sqrt(rootz)  # α*z^(-1/4)
-    tmp2 = 2/3*im*rootz_cubed - 5π*im/12
-    tmp3 = 2/3*im*rootz_cubed + 11π*im/12
+    k2 = 2/3*im*rootz_cubed
+    tmp2 = k2 - 5π*im/12
+    tmp3 = k2 + 11π*im/12
+    k3 = 1/4/z
 
-    h1 = exp(tmp2)*s
-    h2 = exp(-tmp2)*t
-    h1p = exp(tmp2)*(s*(im*rootz - 1/4/z) + sp) # rootz*z^(-1/4) = z^(1/4)
-    h2p = exp(-tmp2)*(t*(-im*rootz - 1/4/z) + tp)
+    e2 = exp(tmp2)  # exp(-tmp2) = 1/exp(tmp3)
+    h1 = e2*s
+    h2 = t/e2
+    h1p = e2*(s*(im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
+    h2p = (t*(-im*rootz - k3) + tp)/e2
 
+    e3 = exp(tmp3)  # exp(-tmp3) = 1/exp(tmp3)
     argz = angle(z)
     if -4π/3 < argz < 0
-        h1 += exp(-tmp3)*t
-        h1p += exp(-tmp3)*(t*(-im*rootz - 1/4/z) + tp)
+        h1 += t/e3
+        h1p += (t*(-im*rootz - k3) + tp)/e3
     else
-        h2 += exp(tmp3)*s
-        h2p += exp(tmp3)*(s*(im*rootz - 1/4/z) + sp)
+        h2 += e3*s
+        h2p += e3*(s*(im*rootz - k3) + sp)
     end
 
     h1 *= tmp1
