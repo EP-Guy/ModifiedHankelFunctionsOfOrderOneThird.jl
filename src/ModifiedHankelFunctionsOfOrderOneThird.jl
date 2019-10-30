@@ -49,8 +49,8 @@ necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
 
 [^1]:
 
-    *Tables of the modified Hankel function of order one-third and of their derivatives*,
-    The Staff of the Computation Library, Harvard University, 1945.
+    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 
 See also: [`powerseries`](@ref), [`asymptotic`](@ref)
 """
@@ -79,8 +79,8 @@ valid in the entire complex plane.
 
 [^1]:
 
-    *Tables of the modified Hankel function of order one-third and of their derivatives*,
-    The Staff of the Computation Library, Harvard University, 1945.
+    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 
 See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
 """
@@ -171,8 +171,8 @@ for ``0 < \\arg z < 4π/3``.
 
 [^1]:
 
-    *Tables of the modified Hankel function of order one-third and of their derivatives*,
-    The Staff of the Computation Library, Harvard University, 1945.
+    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 
 See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
 """
