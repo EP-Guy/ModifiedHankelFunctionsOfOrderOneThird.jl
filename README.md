@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.jl.svg?branch=master)](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.jl) [![Build status](https://ci.appveyor.com/api/projects/status/w115vkl46t4nj4ui?svg=true)](https://ci.appveyor.com/project/EP-Guy/modifiedhankelfunctionsoforderonethird) [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814)
 
 
-
 Solutions to Stokes' differential equation:
 
 ![\frac{\mathrm{d}^2u}{\mathrm{d}z^2} + zu = 0](https://latex.codecogs.com/svg.latex?%5Cfrac%7B%5Cmathrm%7Bd%7D%5E2u%7D%7B%5Cmathrm%7Bd%7Dz%5E2%7D%20&plus;%20zu%20%3D%200)
@@ -72,3 +71,8 @@ See the source for the full sets of solutions.
 ## References
 
 The Staff of the Computation Library (1945), _Tables of the modified Hankel function of order one-third and of their derivatives_. Cambridge, MA: Harvard University Press.
+
+## Citing
+
+We encourage you to cite this package if used in scientific work. See the Zenodo
+badge above or refer to [CITATION.bib](CITATION.bib).
