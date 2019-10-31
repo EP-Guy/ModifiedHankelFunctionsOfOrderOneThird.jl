@@ -15,11 +15,11 @@ From _Tables of the Modified Hankel Functions of Order One-Third and of their De
 ## Usage
 
 To install:
-
 ```julia
 ]add https://github.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.jl
 ```
 
+Then:
 ```julia
 using ModifiedHankelFunctionsOfOrderOneThird
 
