@@ -1,6 +1,6 @@
 # Modified Hankel Functions Of Order One Third and Their Derivatives
 
-[![Build Status](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.jl.svg?branch=master)](https://travis-ci.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.jl) [![Build status](https://ci.appveyor.com/api/projects/status/w115vkl46t4nj4ui?svg=true)](https://ci.appveyor.com/project/EP-Guy/modifiedhankelfunctionsoforderonethird) [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814)
+[![Build Status](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.svg?branch=master)](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl) [![Build status](https://ci.appveyor.com/api/projects/status/w115vkl46t4nj4ui?svg=true)](https://ci.appveyor.com/project/EP-Guy/modifiedhankelfunctionsoforderonethird) [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814)
 
 
 Solutions to Stokes' differential equation:
@@ -16,7 +16,7 @@ From _Tables of the Modified Hankel Functions of Order One-Third and of their De
 
 To install:
 ```julia
-]add https://github.com/EP-Guy/ModifiedHankelFunctionsOfOrderOneThird.jl
+]add https://github.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl
 ```
 
 Then:
