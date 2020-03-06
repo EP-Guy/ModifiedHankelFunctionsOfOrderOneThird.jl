@@ -10,3 +10,7 @@ makedocs(
         "API" => "pages/api.md",
         ],
     )
+
+deploydocs(
+    repo="github.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.git"
+)
