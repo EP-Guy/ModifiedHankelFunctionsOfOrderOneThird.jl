@@ -6,4 +6,7 @@ println("Starting tests")
 
 println("Starting doctests")
 
+DocMeta.setdocmeta!(ModifiedHankelFunctionsOfOrderOneThird, :DocTestSetup,
+    :(using ModifiedHankelFunctionsOfOrderOneThird); recursive=true)
+
 doctest(ModifiedHankelFunctionsOfOrderOneThird)
