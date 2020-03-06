@@ -48,7 +48,7 @@ necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
 # Examples
 
 ```jldoctest
-julia> h1, h2, h1prime, h2prime = modifiedhankel(complex(2.687, -0.648))
+julia> h1, h2, h1prime, h2prime = modifiedhankel(complex(2.687, -0.648));
 ```
 
 # References
