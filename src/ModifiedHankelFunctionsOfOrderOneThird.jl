@@ -218,7 +218,7 @@ function asymptotic(z::T) where T
     k2 = 2/3*im*rootz_cubed
     tmpb = k2 - 5π*im/12
     tmpc = k2 + 11π*im/12
-    k3 = 1/4*zinv
+    k3 = zinv/4  # 1/4/z
 
     e2 = exp(tmpb)  # exp(-tmp2) = 1/exp(tmp3)
     e2inv = inv(e2)
