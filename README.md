@@ -1,11 +1,11 @@
 # Modified Hankel Functions Of Order One Third and Their Derivatives
 
-[![Build Status](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.svg?branch=master)](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl) [![Build status](https://ci.appveyor.com/api/projects/status/w115vkl46t4nj4ui?svg=true)](https://ci.appveyor.com/project/EP-Guy/modifiedhankelfunctionsoforderonethird) [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814)
+[![Build Status](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.svg?branch=master)](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl) [![Build status](https://ci.appveyor.com/api/projects/status/w115vkl46t4nj4ui?svg=true)](https://ci.appveyor.com/project/EP-Guy/modifiedhankelfunctionsoforderonethird) [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814) [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://fgasdia.github.io/ModifiedHankelFunctionsOfOrderOneThird.jl/stable) [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://fgasdia.github.io/ModifiedHankelFunctionsOfOrderOneThird.jl/dev)
 
 
 Solutions to Stokes' differential equation:
 
-![\frac{\mathrm{d}^2u}{\mathrm{d}z^2} + zu = 0](https://latex.codecogs.com/svg.latex?%5Cfrac%7B%5Cmathrm%7Bd%7D%5E2u%7D%7B%5Cmathrm%7Bd%7Dz%5E2%7D%20&plus;%20zu%20%3D%200)
+<p align="center"><img src="/tex/7a9703279d8af8b6c816345789cfc3d6.svg?invert_in_darkmode&sanitize=true" align=middle width=95.89569494999999pt height=35.77743345pt/></p>
 
 From _Tables of the Modified Hankel Functions of Order One-Third and of their Derivatives_:
 
@@ -28,21 +28,21 @@ h1, h2, h1′, h2′ = modifiedhankel(z)
 
 ## The functions _h₁_ and _h₂_
 
-An independent pair of solutions, valid for all values of _z_, is
+An independent pair of solutions, valid for all values of <img src="/tex/f93ce33e511096ed626b4719d50f17d2.svg?invert_in_darkmode&sanitize=true" align=middle width=8.367621899999993pt height=14.15524440000002pt/>, is
 
-![h_1(z) = \frac{k}{i\pi} \int_{L_1} e^{zt + \frac{t^3}{3}} \,\mathrm{d}t](https://latex.codecogs.com/svg.latex?h_1%28z%29%20%3D%20%5Cfrac%7Bk%7D%7Bi%5Cpi%7D%20%5Cint_%7BL_1%7D%20e%5E%7Bzt%20&plus;%20%5Cfrac%7Bt%5E3%7D%7B3%7D%7D%20%5C%2C%5Cmathrm%7Bd%7Dt)
+<p align="center"><img src="/tex/0881e9f68f46ac526be6ce0622c73547.svg?invert_in_darkmode&sanitize=true" align=middle width=173.4397896pt height=39.1573875pt/></p>
 
 and
 
-![h_2(z) = \frac{k^*}{-i\pi} \int_{L_2} e^{zt + \frac{t^3}{3}} \,\mathrm{d}t](https://latex.codecogs.com/svg.latex?h_2%28z%29%20%3D%20%5Cfrac%7Bk%5E*%7D%7B-i%5Cpi%7D%20%5Cint_%7BL_2%7D%20e%5E%7Bzt%20&plus;%20%5Cfrac%7Bt%5E3%7D%7B3%7D%7D%20%5C%2C%5Cmathrm%7Bd%7Dt)
+<p align="center"><img src="/tex/43f1a610ddc4c7f2989ac468c8038443.svg?invert_in_darkmode&sanitize=true" align=middle width=186.22521554999997pt height=39.1573875pt/></p>
 
-where ![k = (12)^\frac{1}{6} e^{\left(-\frac{\pi i}{6} \right)}](https://latex.codecogs.com/svg.latex?k%20%3D%20%2812%29%5E%5Cfrac%7B1%7D%7B6%7D%20e%5E%7B%5Cleft%28-%5Cfrac%7B%5Cpi%20i%7D%7B6%7D%20%5Cright%29%7D)
+where <img src="/tex/6a1370aa3b609ee19cdf955664a9c204.svg?invert_in_darkmode&sanitize=true" align=middle width=116.74815569999998pt height=36.4155132pt/>.
 
-The contours of integration _L₁_ and _L₂_ are
+The contours of integration <img src="/tex/929ed909014029a206f344a28aa47d15.svg?invert_in_darkmode&sanitize=true" align=middle width=17.73978854999999pt height=22.465723500000017pt/> and <img src="/tex/4327ea69d9c5edcc8ddaf24f1d5b47e4.svg?invert_in_darkmode&sanitize=true" align=middle width=17.73978854999999pt height=22.465723500000017pt/> are
 
 ![contoursofintegration](contoursofintegration.svg)
 
-with π/6 < _w_ < π/2. We take _w_ = π/3.
+with <img src="/tex/8f8e464d2606edffa767ab489706c317.svg?invert_in_darkmode&sanitize=true" align=middle width=108.84312119999998pt height=24.65753399999998pt/>. We take <img src="/tex/7a89758c6f0f5b13c3254cb7dfd3b713.svg?invert_in_darkmode&sanitize=true" align=middle width=60.52698299999998pt height=24.65753399999998pt/>.
 
 ## Solutions
 
@@ -50,27 +50,27 @@ Two solution approaches are used. If `abs2(z) < 36`, a power series solution is 
 
 ### Power series
 
-Stokes' equation may be solved in a power series of _z_, valid in the entire complex plane,
+Stokes' equation may be solved in a power series of <img src="/tex/f93ce33e511096ed626b4719d50f17d2.svg?invert_in_darkmode&sanitize=true" align=middle width=8.367621899999993pt height=14.15524440000002pt/>, valid in the entire complex plane,
 
-![h_1(z) = g + \frac{i\sqrt{3}}{3} ( g - 2f), \quad h_2(z) = g - \frac{i\sqrt{3}}{3} ( g - 2f)](https://latex.codecogs.com/svg.latex?h_1%28z%29%20%3D%20g%20&plus;%20%5Cfrac%7Bi%5Csqrt%7B3%7D%7D%7B3%7D%20%28%20g%20-%202f%29%2C%20%5Cquad%20h_2%28z%29%20%3D%20g%20-%20%5Cfrac%7Bi%5Csqrt%7B3%7D%7D%7B3%7D%20%28%20g%20-%202f%29)
+<p align="center"><img src="/tex/2386478755dc5db6621d0ba4086a70b8.svg?invert_in_darkmode&sanitize=true" align=middle width=382.35967934999996pt height=36.65224035pt/></p>
 
 where
 
-![f(z) = \frac{2^{1/3}}{\Gamma(\frac{2}{3})} \left[ 1 + \sum_1^\infty \frac{(-)^m (3m-2)(3m-5)\cdots 4\cdot 1}{(3m)!} z^{3m} \right]](https://latex.codecogs.com/svg.latex?f%28z%29%20%3D%20%5Cfrac%7B2%5E%7B1/3%7D%7D%7B%5CGamma%28%5Cfrac%7B2%7D%7B3%7D%29%7D%20%5Cleft%5B%201%20&plus;%20%5Csum_1%5E%5Cinfty%20%5Cfrac%7B%28-%29%5Em%20%283m-2%29%283m-5%29%5Ccdots%204%5Ccdot%201%7D%7B%283m%29%21%7D%20z%5E%7B3m%7D%20%5Cright%5D)
+<p align="center"><img src="/tex/c957005964fab87d65f9dfb65fd40d2e.svg?invert_in_darkmode&sanitize=true" align=middle width=416.97635099999997pt height=49.315569599999996pt/></p>
 
-![g(z) = \frac{2^{1/3}}{3^{2/3}\Gamma(\frac{4}{3})} \left[ z + \sum_1^\infty \frac{(-)^m (3m-1)(3m-4)\cdots 5\cdot 2}{(3m+1)!} z^{3m+1} \right]](https://latex.codecogs.com/svg.latex?g%28z%29%20%3D%20%5Cfrac%7B2%5E%7B1/3%7D%7D%7B3%5E%7B2/3%7D%5CGamma%28%5Cfrac%7B4%7D%7B3%7D%29%7D%20%5Cleft%5B%20z%20&plus;%20%5Csum_1%5E%5Cinfty%20%5Cfrac%7B%28-%29%5Em%20%283m-1%29%283m-4%29%5Ccdots%205%5Ccdot%202%7D%7B%283m&plus;1%29%21%7D%20z%5E%7B3m&plus;1%7D%20%5Cright%5D)
+<p align="center"><img src="/tex/7538b8a402fd0a8b8104ce9d3a82a397.svg?invert_in_darkmode&sanitize=true" align=middle width=461.26299285pt height=49.315569599999996pt/></p>
 
 ### Asymptotic expansion
 
-The asymptotic expansions can be used to estimate _h₁_, _h₂_, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
+The asymptotic expansions can be used to estimate <img src="/tex/5a95dbebd5e79e850a576db54f501ab8.svg?invert_in_darkmode&sanitize=true" align=middle width=16.02366149999999pt height=22.831056599999986pt/>, <img src="/tex/0f7cea0b89929faf20eda59174bc247f.svg?invert_in_darkmode&sanitize=true" align=middle width=16.02366149999999pt height=22.831056599999986pt/>, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
 
-The expansion for _h₁_ for -2π/3 < arg _z_ < 4π/3 is
+The expansion for <img src="/tex/5a95dbebd5e79e850a576db54f501ab8.svg?invert_in_darkmode&sanitize=true" align=middle width=16.02366149999999pt height=22.831056599999986pt/> for <img src="/tex/2bc9dc1ce765d768fd71a26518a924af.svg?invert_in_darkmode&sanitize=true" align=middle width=160.06845525pt height=24.65753399999998pt/> is
 
-![h_1(z) \approx \alpha z^{-1/4} e^{\frac{2}{3}iz^{3/2} - \frac{5\pi i}{12}} \left[ 1 + \sum_{m=1} (-i)^m C_m z^\frac{-3m}{2} \right]](https://latex.codecogs.com/svg.latex?h_1%28z%29%20%5Capprox%20%5Calpha%20z%5E%7B-1/4%7D%20e%5E%7B%5Cfrac%7B2%7D%7B3%7Diz%5E%7B3/2%7D%20-%20%5Cfrac%7B5%5Cpi%20i%7D%7B12%7D%7D%20%5Cleft%5B%201%20&plus;%20%5Csum_%7Bm%3D1%7D%20%28-i%29%5Em%20C_m%20z%5E%5Cfrac%7B-3m%7D%7B2%7D%20%5Cright%5D)
+<p align="center"><img src="/tex/e7e4ce30240a2c855f796c7ae9e72946.svg?invert_in_darkmode&sanitize=true" align=middle width=372.81839924999997pt height=49.315569599999996pt/></p>
 
 where
 
-![C_m = \frac{(9-4)(81-4)\cdots (9[2m-1]^2-4)}{2^{4m}3^m m!}](https://latex.codecogs.com/svg.latex?C_m%20%3D%20%5Cfrac%7B%289-4%29%2881-4%29%5Ccdots%20%289%5B2m-1%5D%5E2-4%29%7D%7B2%5E%7B4m%7D3%5Em%20m%21%7D)
+<p align="center"><img src="/tex/c23b4cbc617449d1f0f90b637fc3a962.svg?invert_in_darkmode&sanitize=true" align=middle width=296.41710945pt height=35.77743345pt/></p>
 
 See the source for the full sets of solutions.
 
