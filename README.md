@@ -28,7 +28,7 @@ h1, h2, h1′, h2′ = modifiedhankel(z)
 
 ## The functions _h₁_ and _h₂_
 
-An independent pair of solutions, valid for all values of _z_, is
+An independent pair of solutions, valid for all values of <img src="/tex/f93ce33e511096ed626b4719d50f17d2.svg?invert_in_darkmode&sanitize=true" align=middle width=8.367621899999993pt height=14.15524440000002pt/>, is
 
 <p align="center"><img src="/tex/0881e9f68f46ac526be6ce0622c73547.svg?invert_in_darkmode&sanitize=true" align=middle width=173.4397896pt height=39.1573875pt/></p>
 
@@ -36,13 +36,13 @@ and
 
 <p align="center"><img src="/tex/43f1a610ddc4c7f2989ac468c8038443.svg?invert_in_darkmode&sanitize=true" align=middle width=186.22521554999997pt height=39.1573875pt/></p>
 
-where <img src="/tex/6a1370aa3b609ee19cdf955664a9c204.svg?invert_in_darkmode&sanitize=true" align=middle width=116.74815569999998pt height=36.4155132pt/>
+where <img src="/tex/6a1370aa3b609ee19cdf955664a9c204.svg?invert_in_darkmode&sanitize=true" align=middle width=116.74815569999998pt height=36.4155132pt/>.
 
-The contours of integration _L₁_ and _L₂_ are
+The contours of integration <img src="/tex/929ed909014029a206f344a28aa47d15.svg?invert_in_darkmode&sanitize=true" align=middle width=17.73978854999999pt height=22.465723500000017pt/> and <img src="/tex/4327ea69d9c5edcc8ddaf24f1d5b47e4.svg?invert_in_darkmode&sanitize=true" align=middle width=17.73978854999999pt height=22.465723500000017pt/> are
 
 ![contoursofintegration](contoursofintegration.svg)
 
-with π/6 < _w_ < π/2. We take _w_ = π/3.
+with <img src="/tex/8f8e464d2606edffa767ab489706c317.svg?invert_in_darkmode&sanitize=true" align=middle width=108.84312119999998pt height=24.65753399999998pt/>. We take <img src="/tex/7a89758c6f0f5b13c3254cb7dfd3b713.svg?invert_in_darkmode&sanitize=true" align=middle width=60.52698299999998pt height=24.65753399999998pt/>.
 
 ## Solutions
 
@@ -50,7 +50,7 @@ Two solution approaches are used. If `abs2(z) < 36`, a power series solution is 
 
 ### Power series
 
-Stokes' equation may be solved in a power series of _z_, valid in the entire complex plane,
+Stokes' equation may be solved in a power series of <img src="/tex/f93ce33e511096ed626b4719d50f17d2.svg?invert_in_darkmode&sanitize=true" align=middle width=8.367621899999993pt height=14.15524440000002pt/>, valid in the entire complex plane,
 
 <p align="center"><img src="/tex/2386478755dc5db6621d0ba4086a70b8.svg?invert_in_darkmode&sanitize=true" align=middle width=382.35967934999996pt height=36.65224035pt/></p>
 
@@ -62,9 +62,9 @@ where
 
 ### Asymptotic expansion
 
-The asymptotic expansions can be used to estimate _h₁_, _h₂_, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
+The asymptotic expansions can be used to estimate <img src="/tex/5a95dbebd5e79e850a576db54f501ab8.svg?invert_in_darkmode&sanitize=true" align=middle width=16.02366149999999pt height=22.831056599999986pt/>, <img src="/tex/0f7cea0b89929faf20eda59174bc247f.svg?invert_in_darkmode&sanitize=true" align=middle width=16.02366149999999pt height=22.831056599999986pt/>, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
 
-The expansion for _h₁_ for -2π/3 < arg _z_ < 4π/3 is
+The expansion for <img src="/tex/5a95dbebd5e79e850a576db54f501ab8.svg?invert_in_darkmode&sanitize=true" align=middle width=16.02366149999999pt height=22.831056599999986pt/> for <img src="/tex/2bc9dc1ce765d768fd71a26518a924af.svg?invert_in_darkmode&sanitize=true" align=middle width=160.06845525pt height=24.65753399999998pt/> is
 
 <p align="center"><img src="/tex/e7e4ce30240a2c855f796c7ae9e72946.svg?invert_in_darkmode&sanitize=true" align=middle width=372.81839924999997pt height=49.315569599999996pt/></p>
 
