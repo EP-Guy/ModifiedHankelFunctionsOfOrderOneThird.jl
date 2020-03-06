@@ -1,0 +1,3 @@
+using Documenter, ModifiedHankelFunctionsOfOrderOneThird
+
+makedocs(sitename="ModifiedHankelFunctionsOfOrderOneThird.jl")
