@@ -5,7 +5,7 @@
 
 Solutions to Stokes' differential equation:
 
-![\frac{\mathrm{d}^2u}{\mathrm{d}z^2} + zu = 0](https://latex.codecogs.com/svg.latex?%5Cfrac%7B%5Cmathrm%7Bd%7D%5E2u%7D%7B%5Cmathrm%7Bd%7Dz%5E2%7D%20&plus;%20zu%20%3D%200)
+<p align="center"><img src="/tex/7a9703279d8af8b6c816345789cfc3d6.svg?invert_in_darkmode&sanitize=true" align=middle width=95.89569494999999pt height=35.77743345pt/></p>
 
 From _Tables of the Modified Hankel Functions of Order One-Third and of their Derivatives_:
 
