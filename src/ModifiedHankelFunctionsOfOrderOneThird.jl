@@ -47,7 +47,7 @@ necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
 
 # References
 
-[^1]:
+[^SCL1945]:
 
     The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
     order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
@@ -77,7 +77,7 @@ valid in the entire complex plane.
 
 # References
 
-[^1]:
+[^SCL1945]:
 
     The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
     order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
@@ -168,7 +168,7 @@ for ``0 < \\arg z < 4π/3``.
 
 # References
 
-[^1]:
+[^SCL1945]:
 
     The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
     order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
