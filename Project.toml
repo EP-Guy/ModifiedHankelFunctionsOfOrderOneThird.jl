@@ -1,6 +1,6 @@
 name = "ModifiedHankelFunctionsOfOrderOneThird"
 uuid = "b1c65800-dbf0-11e8-0001-4d87e1e07e69"
-authors = ["Forrest Gasdia <EP-Guy@users.noreply.github.com>"]
+authors = ["Forrest Gasdia <17058025+fgasdia@users.noreply.github.com>"]
 version = "0.1.2"
 
 [deps]
