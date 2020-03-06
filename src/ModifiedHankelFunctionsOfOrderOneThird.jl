@@ -186,6 +186,7 @@ function asymptotic(z::T) where T
     rootz = sqrt(z)
     rootz_cubed = rootz*z  # z^(3/2)
 
+    zinv = inv(z)
     zterm = im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
@@ -208,7 +209,7 @@ function asymptotic(z::T) where T
         sp += tmp1*i
         tp += tmp2*i
     end
-    k1 = -3/2*zterm/z  # -3/2*im*z^(-5/2)
+    k1 = -3/2*zterm*zinv  # -3/2*im*z^(-5/2)
     sp *= k1
     tp *= k1  # yes, same for both
 
@@ -216,19 +217,21 @@ function asymptotic(z::T) where T
     k2 = 2/3*im*rootz_cubed
     tmpb = k2 - 5π*im/12
     tmpc = k2 + 11π*im/12
-    k3 = 1/4/z
+    k3 = 1/4*zinv
 
     e2 = exp(tmpb)  # exp(-tmp2) = 1/exp(tmp3)
+    e2inv = inv(e2)
     h1 = e2*s
-    h2 = t/e2
+    h2 = t*e2inv
     h1p = e2*(s*(im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
-    h2p = (t*(-im*rootz - k3) + tp)/e2
+    h2p = (t*(-im*rootz - k3) + tp)*e2inv
 
     e3 = exp(tmpc)  # exp(-tmp3) = 1/exp(tmp3)
+    e3inv = inv(e3)
     argz = angle(z)
     if -4π/3 < argz < 0
-        h1 += t/e3
-        h1p += (t*(-im*rootz - k3) + tp)/e3
+        h1 += t*e3inv
+        h1p += (t*(-im*rootz - k3) + tp)*e3inv
     else
         h2 += e3*s
         h2p += e3*(s*(im*rootz - k3) + sp)
