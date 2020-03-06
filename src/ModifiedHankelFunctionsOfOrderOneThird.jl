@@ -5,8 +5,11 @@ module ModifiedHankelFunctionsOfOrderOneThird
 using SpecialFunctions
 using StaticArrays
 using Markdown
+using Documenter
 
 export modifiedhankel
+
+DocMeta.setdocmeta!(ModifiedHankelFunctionsOfOrderOneThird, :DocTestSetup, nothing)
 
 # Number of terms to sum in both `powerseries` and `asymptotic` solutions
 # Larger `NUMTERMS` generate successively smaller values, but can lead to floating point
