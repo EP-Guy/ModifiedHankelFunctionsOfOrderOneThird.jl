@@ -28,7 +28,7 @@ h1, h2, h1′, h2′ = modifiedhankel(z)
 
 ## The functions _h₁_ and _h₂_
 
-An independent pair of solutions, valid for all values of _z_, is
+An independent pair of solutions, valid for all values of $z$, is
 
 $$ h_1(z) = \frac{k}{i\pi} \int_{L_1} e^{zt + \frac{t^3}{3}} \,\mathrm{d}t $$
 
@@ -36,13 +36,13 @@ and
 
 $$ h_2(z) = \frac{k^\ast}{-i\pi} \int_{L_2} e^{zt + \frac{t^3}{3}} \,\mathrm{d}t $$
 
-where $k = (12)^\frac{1}{6} e^{\left(-\frac{\pi i}{6} \right)}$
+where $k = (12)^\frac{1}{6} e^{\left(-\frac{\pi i}{6} \right)}$.
 
-The contours of integration _L₁_ and _L₂_ are
+The contours of integration $L_1$ and $L_2$ are
 
 ![contoursofintegration](contoursofintegration.svg)
 
-with π/6 < _w_ < π/2. We take _w_ = π/3.
+with $\pi/6 < w < \pi/2$. We take $w = \pi/3$.
 
 ## Solutions
 
@@ -50,7 +50,7 @@ Two solution approaches are used. If `abs2(z) < 36`, a power series solution is 
 
 ### Power series
 
-Stokes' equation may be solved in a power series of _z_, valid in the entire complex plane,
+Stokes' equation may be solved in a power series of $z$, valid in the entire complex plane,
 
 $$ h_1(z) = g + \frac{i\sqrt{3}}{3} ( g - 2f), \quad h_2(z) = g - \frac{i\sqrt{3}}{3} ( g - 2f) $$
 
@@ -62,9 +62,9 @@ $$ g(z) = \frac{2^{1/3}}{3^{2/3}\Gamma(\frac{4}{3})} \left[ z + \sum_1^\infty \f
 
 ### Asymptotic expansion
 
-The asymptotic expansions can be used to estimate _h₁_, _h₂_, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
+The asymptotic expansions can be used to estimate $h_1$, $h_2$, and their derivatives, although in general with less accuracy than the power series. Two expansions are required depending on the value of `arg z`. The existence of two expressions of different forms which represent asymptotically the same integral function is an example of [Stokes' phenomenon](https://en.wikipedia.org/wiki/Stokes_phenomenon).
 
-The expansion for _h₁_ for -2π/3 < arg _z_ < 4π/3 is
+The expansion for $h_1$ for $-2\pi/3 < \arg z < 4\pi/3$ is
 
 $$ h_1(z) \approx \alpha z^{-1/4} e^{\frac{2}{3}iz^{3/2} - \frac{5\pi i}{12}} \left[ 1 + \sum_{m=1} (-i)^m C_m z^\frac{-3m}{2} \right] $$
 
