@@ -12,7 +12,10 @@ makedocs(
         "Home" => "index.md",
         "API" => "pages/api.md",
         ],
-    )
+    format = Documenter.HTML(
+        prettyurls = get(ENV, "CI", nothing) == "true"
+    ),
+)
 
 deploydocs(
     repo="github.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.git"

@@ -39,11 +39,11 @@ const Cvec = @SVector [C(BigInt(i)) for i = 1:NUMTERMS]
 """
     modifiedhankel(z)
 
-Return h₁, h₂, h₁′, and h₂′, the first and second modified Hankel functions of order 1/3 and
-their derivatives.
+Return ``h₁``, ``h₂``, ``h₁′``, and ``h₂′``, the first and second modified Hankel functions
+of order 1/3 and their derivatives.
 
 These functions solve Stokes' equation ``d²u/dz² + zu = 0`` as a power series in ``z`` for
-`abs(z) < 6` and an approximate asymptotic expansion otherwise. The asymptotic solution is
+`abs2(z) < 36` and an approximate asymptotic expansion otherwise. The asymptotic solution is
 necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
 
 # Examples
@@ -56,8 +56,8 @@ julia> h1, h2, h1prime, h2prime = modifiedhankel(complex(2.687, -0.648));
 
 [^SCL1945]:
 
-    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
+  The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+  order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 
 See also: [`powerseries`](@ref), [`asymptotic`](@ref)
 """
@@ -76,8 +76,8 @@ end
 """
     powerseries(z)
 
-Return h₁, h₂, h₁′, and h₂′, the first and second modified Hankel functions of order 1/3 and
-their derivatives using a *power series*.
+Return ``h₁``, ``h₂``, ``h₁′``, and ``h₂′``, the first and second modified Hankel functions
+of order 1/3 and their derivatives using a *power series*.
 
 These functions solve Stokes' equation ``d²u/dz² + zu = 0`` as a power series in ``z``,
 valid in the entire complex plane.
@@ -86,8 +86,8 @@ valid in the entire complex plane.
 
 [^SCL1945]:
 
-    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
+  The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+  order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 
 See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
 """
@@ -126,20 +126,20 @@ end
 """
     asymptotic(z)
 
-Return h₁, h₂, h₁′, and h₂′, the first and second modified Hankel functions of order 1/3 and
-their derivatives using an *asymptotic expansion*.
+Return ``h₁``, ``h₂``, ``h₁′``, and ``h₂′``, the first and second modified Hankel functions
+of order 1/3 and their derivatives using an *asymptotic expansion*.
 
-Two separate functions, valid across separate ranges of ``arg(z)`` are necessary to cover
+Two separate functions, valid across separate ranges of ``\\arg(z)`` are necessary to cover
 the full region of the complex plane. This is an example of Stokes' phenomenon, the existence
 of two expressions of different forms which represent asymptotically the same integral function.
 
 For ``h₁`` on ``-2π/3 < \\arg z < 4π/3``:
 ```math
-h₁(z) ≈ α z^{-1/4} e^{2/3 i z^{3/2} - 5πi/12} \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right)
+h₁(z) ≈ α z^{-1/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) \\
 
-h₁′(z) ≈ α i z^{1/4} e^{2/3 i z^{3/2} - 5πi/12} \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) -
-    α/4 z^{-5/4} e^{2/3 i z^{3/2} - 5πi/12} \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) -
-    3/2 α z^{-1/4} e^{2/3 i z^{3/2} - 5πi/12} \\left( \\sum_{m=1} (-i)^m m C_m z^{-3m/2 - 1} \\right)
+h₁'(z) ≈ α i z^{1/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) \\
+    - α/4 z^{-5/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) \\
+    - 3/2 α z^{-1/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( \\sum_{m=1} (-i)^m m C_m z^{-3m/2 - 1} \\right)
 ```
 where
 ```math
@@ -147,21 +147,21 @@ C_m = \\frac{(9-4)(81-4)\\cdots (9[2m-1]^2-4)}{2^{4m}3^m m!}
 ```
 and
 ```math
-h₁(z) ≈ h₁(z) + α z^{-1/4} e^{-2/3 i z^{3/2} - 11πi/12} \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right)
+h₁(z) ≈ h₁(z) + α z^{-1/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) \\
 
-h₁′(z) ≈ h₁′(z) - α z^{1/4} e^{-2/3 i z^{3/2} - 11πi/12} \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) -
-    α/4 z^{-5/4} e^{-2/3 i z^{3/2} - 11πi/12} \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) -
-    3/2 α z^{-1/4} e^{-2/3 i z^{3/2} - 11πi/12} \\left( \\sum_{m=1} i^m m C_m z^{-3m/2 - 1} \\right)
+h₁'(z) ≈ h₁′(z) - α z^{1/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) \\
+    - α/4 z^{-5/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) \\
+    - 3/2 α z^{-1/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( \\sum_{m=1} i^m m C_m z^{-3m/2 - 1} \\right)
 ```
 for ``-4π/3 < \\arg z < 0``.
 
 And for ``h₂`` on ``-4π/3 < \\arg z < 2π/3``:
 ```math
-h₂(z) ≈ α z^{-1/4} e^{-2/3 i z^{3/2} + 5πi/12} \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right)
+h₂(z) ≈ α z^{-1/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) \\
 
-h₂′(z) ≈ -α z^{1/4} e^{-2/3 i z^{3/2} + 5πi/12} \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) -
-    α/4 z^{-5/4} e^{-2/3 i z^{3/2} + 5πi/12} \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) -
-    3/2 α z^{-1/4} e^{-2/3 i z^{3/2} + 5πi/12} \\left( i^m m C_m z^{-3m/2 - 1} \\right)
+h₂′(z) ≈ -α z^{1/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) -
+    α/4 z^{-5/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) -
+    3/2 α z^{-1/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( i^m m C_m z^{-3m/2 - 1} \\right)
 ```
 and
 ```math
@@ -177,8 +177,8 @@ for ``0 < \\arg z < 4π/3``.
 
 [^SCL1945]:
 
-    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
+  The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+  order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 
 See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
 """
