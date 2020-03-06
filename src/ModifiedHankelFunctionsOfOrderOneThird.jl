@@ -30,7 +30,7 @@ const d₀ = b₀
 d(m) = m == 0 ? d₀ : -d(m-1)/((3m-2)*3m)
 const dvec = @SVector [d(i) for i = 0:NUMTERMS]
 
-Cterm(m) = 9(2m - 1)^2 - 4
+Cterm(m) = 9*(2m - 1)^2 - 4
 C(m)::Float64 = prod(Cterm, 1:m)/(2^(4m)*3^m*factorial(m))
 const Cvec = @SVector [C(BigInt(i)) for i = 1:NUMTERMS]
 
@@ -116,7 +116,6 @@ function powerseries(z)
     return h1, h2, h1p, h2p
 end
 
-
 """
     asymptotic(z)
 
@@ -176,7 +175,7 @@ for ``0 < \\arg z < 4π/3``.
 
 See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
 """
-function asymptotic(z)
+function asymptotic(z::T) where T
     α = cbrt(2)*3^(1/6)/sqrt(π)
     rootz = sqrt(z)
     rootz_cubed = rootz*z  # z^(3/2)
@@ -184,12 +183,13 @@ function asymptotic(z)
     zterm = im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
-    zpower = one(z)
-    negative_zpower = one(z)
-    s = one(z)
-    t = one(z)
-    sp = zero(z)
-    tp = zero(z)
+    cT = complex(T)
+    zpower = one(cT)
+    negative_zpower = one(cT)
+    s = one(cT)
+    t = one(cT)
+    sp = zero(cT)
+    tp = zero(cT)
     @inbounds for i = 1:NUMTERMS
         zpower *= zterm
         negative_zpower *= negative_zterm
@@ -206,19 +206,19 @@ function asymptotic(z)
     sp *= k1
     tp *= k1  # yes, same for both
 
-    tmp1 = α/sqrt(rootz)  # α*z^(-1/4)
+    tmpa = α/sqrt(rootz)  # α*z^(-1/4)
     k2 = 2/3*im*rootz_cubed
-    tmp2 = k2 - 5π*im/12
-    tmp3 = k2 + 11π*im/12
+    tmpb = k2 - 5π*im/12
+    tmpc = k2 + 11π*im/12
     k3 = 1/4/z
 
-    e2 = exp(tmp2)  # exp(-tmp2) = 1/exp(tmp3)
+    e2 = exp(tmpb)  # exp(-tmp2) = 1/exp(tmp3)
     h1 = e2*s
     h2 = t/e2
     h1p = e2*(s*(im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
     h2p = (t*(-im*rootz - k3) + tp)/e2
 
-    e3 = exp(tmp3)  # exp(-tmp3) = 1/exp(tmp3)
+    e3 = exp(tmpc)  # exp(-tmp3) = 1/exp(tmp3)
     argz = angle(z)
     if -4π/3 < argz < 0
         h1 += t/e3
@@ -228,10 +228,10 @@ function asymptotic(z)
         h2p += e3*(s*(im*rootz - k3) + sp)
     end
 
-    h1 *= tmp1
-    h2 *= tmp1
-    h1p *= tmp1
-    h2p *= tmp1
+    h1 *= tmpa
+    h2 *= tmpa
+    h1p *= tmpa
+    h2p *= tmpa
 
     return h1, h2, h1p, h2p
 end

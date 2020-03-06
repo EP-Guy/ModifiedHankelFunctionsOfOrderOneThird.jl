@@ -1,5 +1,4 @@
 using Test
-
 using ModifiedHankelFunctionsOfOrderOneThird
 
 @testset "Zeros of h₂" begin
