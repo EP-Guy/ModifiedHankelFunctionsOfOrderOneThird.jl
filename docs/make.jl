@@ -12,7 +12,7 @@ makedocs(
         "Home" => "index.md",
         "API" => "pages/api.md",
         ],
-    )
+)
 
 deploydocs(
     repo="github.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.git"
