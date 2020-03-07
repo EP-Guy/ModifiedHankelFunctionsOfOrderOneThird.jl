@@ -39,12 +39,16 @@ const Cvec = @SVector [C(BigInt(i)) for i = 1:NUMTERMS]
 """
     modifiedhankel(z)
 
-Return ``h₁``, ``h₂``, ``h₁′``, and ``h₂′``, the first and second modified Hankel functions
+Return ``h₁``, ``h₂``, ``h₁'``, and ``h₂'``, the first and second modified Hankel functions
 of order 1/3 and their derivatives.
 
 These functions solve Stokes' equation ``d²u/dz² + zu = 0`` as a power series in ``z`` for
 `abs2(z) < 36` and an approximate asymptotic expansion otherwise. The asymptotic solution is
 necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
+
+For more information, see [^SCL1945].
+
+See also: [`powerseries`](@ref), [`asymptotic`](@ref)
 
 # Examples
 
@@ -56,10 +60,8 @@ julia> h1, h2, h1prime, h2prime = modifiedhankel(complex(2.687, -0.648));
 
 [^SCL1945]:
 
-  The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-  order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
-
-See also: [`powerseries`](@ref), [`asymptotic`](@ref)
+    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 """
 function modifiedhankel(z)
     if abs2(z) < 36
@@ -76,20 +78,19 @@ end
 """
     powerseries(z)
 
-Return ``h₁``, ``h₂``, ``h₁′``, and ``h₂′``, the first and second modified Hankel functions
-of order 1/3 and their derivatives using a *power series*.
+Return ``h₁``, ``h₂``, ``h₁'``, and ``h₂'``, the first and second modified Hankel functions
+of order 1/3 and their derivatives using a *power series* with 30 terms.
 
-These functions solve Stokes' equation ``d²u/dz² + zu = 0`` as a power series in ``z``,
-valid in the entire complex plane.
+For more information, see [^SCL1945].
+
+See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
 
 # References
 
 [^SCL1945]:
 
-  The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-  order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
-
-See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
+    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 """
 function powerseries(z)
     # Auxiliary functions
@@ -99,7 +100,8 @@ function powerseries(z)
     f′val = oftype(z, cvec[1])
     g′val = oftype(z, dvec[1])
 
-    zterm = z^3
+    z² = z^2
+    zterm = z²*z # z³
     zpow = one(z)
     @inbounds for i = 2:NUMTERMS
         zpow *= zterm  # for z^(3i)
@@ -109,11 +111,11 @@ function powerseries(z)
         g′val += dvec[i]*zpow
     end
     gval *= z
-    f′val *= -z^2
+    f′val *= -z²
 
     isqrt3over3 = im*sqrt(3)/3
-    k1 = isqrt3over3*(gval - 2fval)
-    k2 = isqrt3over3*(g′val - 2f′val)
+    k1 = isqrt3over3*(gval - 2*fval)
+    k2 = isqrt3over3*(g′val - 2*f′val)
 
     h1 = gval + k1
     h2 = gval - k1
@@ -126,61 +128,19 @@ end
 """
     asymptotic(z)
 
-Return ``h₁``, ``h₂``, ``h₁′``, and ``h₂′``, the first and second modified Hankel functions
-of order 1/3 and their derivatives using an *asymptotic expansion*.
+Return ``h₁``, ``h₂``, ``h₁'``, and ``h₂'``, the first and second modified Hankel functions
+of order 1/3 and their derivatives using an *asymptotic expansion*, useful for `abs2(z) > 36`.
 
-Two separate functions, valid across separate ranges of ``\\arg(z)`` are necessary to cover
-the full region of the complex plane. This is an example of Stokes' phenomenon, the existence
-of two expressions of different forms which represent asymptotically the same integral function.
+For more information, see [^SCL1945].
 
-For ``h₁`` on ``-2π/3 < \\arg z < 4π/3``:
-```math
-h₁(z) ≈ α z^{-1/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) \\
-
-h₁'(z) ≈ α i z^{1/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) \\
-    - α/4 z^{-5/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) \\
-    - 3/2 α z^{-1/4} \\exp(2/3 i z^{3/2} - 5πi/12) \\left( \\sum_{m=1} (-i)^m m C_m z^{-3m/2 - 1} \\right)
-```
-where
-```math
-C_m = \\frac{(9-4)(81-4)\\cdots (9[2m-1]^2-4)}{2^{4m}3^m m!}
-```
-and
-```math
-h₁(z) ≈ h₁(z) + α z^{-1/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) \\
-
-h₁'(z) ≈ h₁′(z) - α z^{1/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) \\
-    - α/4 z^{-5/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( 1 + \\sum_{m_1} (i)^m C_m z^{-3m/2} \\right) \\
-    - 3/2 α z^{-1/4} \\exp(-2/3 i z^{3/2} - 11πi/12) \\left( \\sum_{m=1} i^m m C_m z^{-3m/2 - 1} \\right)
-```
-for ``-4π/3 < \\arg z < 0``.
-
-And for ``h₂`` on ``-4π/3 < \\arg z < 2π/3``:
-```math
-h₂(z) ≈ α z^{-1/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) \\
-
-h₂′(z) ≈ -α z^{1/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) -
-    α/4 z^{-5/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( 1 + \\sum_{m=1} (i)^m C_m z^{-3m/2} \\right) -
-    3/2 α z^{-1/4} \\exp(-2/3 i z^{3/2} + 5πi/12) \\left( i^m m C_m z^{-3m/2 - 1} \\right)
-```
-and
-```math
-h₂(z) ≈ h₂(z) + α z^{-1/4} e^{2/3 i z^{3/2} + 11πi/12} \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right)
-
-h₂′(z) ≈ h₂′(z) + α z^{1/4} e^{2/3 i z^{3/2} + 11πi/12} \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) -
-    α/4 z^{-5/4} e^{2/3 i z^{3/2} + 11πi/12} \\left( 1 + \\sum_{m=1} (-i)^m C_m z^{-3m/2} \\right) -
-    3/2 α z^{-1/4} e^{2/3 i z^{3/2} + 11πi/12} \\left( \\sum_{m=1} (-i)^m m C_m z^{-3m/2 - 1} \\right)
-```
-for ``0 < \\arg z < 4π/3``.
+See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
 
 # References
 
 [^SCL1945]:
 
-  The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-  order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
-
-See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
+    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
+    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 """
 function asymptotic(z::T) where T
     α = cbrt(2)*3^(1/6)/sqrt(π)
@@ -220,14 +180,14 @@ function asymptotic(z::T) where T
     tmpc = k2 + 11π*im/12
     k3 = zinv/4  # 1/4/z
 
-    e2 = exp(tmpb)  # exp(-tmp2) = 1/exp(tmp3)
+    e2 = exp(tmpb)  # exp(-tmpb) = 1/exp(tmpb)
     e2inv = inv(e2)
     h1 = e2*s
     h2 = t*e2inv
     h1p = e2*(s*(im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
     h2p = (t*(-im*rootz - k3) + tp)*e2inv
 
-    e3 = exp(tmpc)  # exp(-tmp3) = 1/exp(tmp3)
+    e3 = exp(tmpc)  # exp(-tmpc) = 1/exp(tmpc)
     e3inv = inv(e3)
     argz = angle(z)
     if -4π/3 < argz < 0

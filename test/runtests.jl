@@ -1,10 +1,10 @@
 using Test, Documenter, ModifiedHankelFunctionsOfOrderOneThird
 
-println("Starting tests")
+println("\nStarting tests")
 
 @time include("ModifiedHankelFunctionTests.jl")
 
-println("Starting doctests")
+println("\nStarting doctests")
 
 DocMeta.setdocmeta!(ModifiedHankelFunctionsOfOrderOneThird, :DocTestSetup,
     :(using ModifiedHankelFunctionsOfOrderOneThird); recursive=true)

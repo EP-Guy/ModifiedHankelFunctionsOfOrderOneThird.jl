@@ -1,7 +1,13 @@
-# API
+### Functions exported from `ModifiedHankelFunctionsOfOrderOneThird`:
 
-```@docs
-modifiedhankel(z)
-ModifiedHankelFunctionsOfOrderOneThird.powerseries(z)
-ModifiedHankelFunctionsOfOrderOneThird.asymptotic(z)
+```@autodocs
+Modules = [ModifiedHankelFunctionsOfOrderOneThird]
+Private = false
+```
+
+### Private functions:
+
+```@autodocs
+Modules = [ModifiedHankelFunctionsOfOrderOneThird]
+Public = false
 ```
