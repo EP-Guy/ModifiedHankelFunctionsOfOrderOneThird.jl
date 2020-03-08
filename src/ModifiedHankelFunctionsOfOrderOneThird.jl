@@ -104,6 +104,7 @@ function powerseries(z)
     zterm = z²*z # z³
     zpow = one(z)
     @inbounds for i = 2:NUMTERMS
+        # TODO: Stop interations based on accuracy/convergence criteria
         zpow *= zterm  # for z^(3i)
         fval += avec[i]*zpow
         gval += bvec[i]*zpow
@@ -159,6 +160,7 @@ function asymptotic(z::T) where T
     sp = zero(cT)
     tp = zero(cT)
     @inbounds for i = 1:NUMTERMS
+        # TODO: Stop interations based on accuracy/convergence criteria
         zpower *= zterm
         negative_zpower *= negative_zterm
 
