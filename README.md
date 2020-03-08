@@ -23,7 +23,7 @@ Then:
 ```julia
 using ModifiedHankelFunctionsOfOrderOneThird
 
-h1, h2, h1′, h2′ = modifiedhankel(z)
+h1, h2, h1prime, h2prime = modifiedhankel(z)
 ```
 
 ## The functions _h₁_ and _h₂_
