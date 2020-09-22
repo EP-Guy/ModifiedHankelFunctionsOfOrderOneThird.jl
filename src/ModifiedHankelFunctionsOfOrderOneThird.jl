@@ -1,4 +1,4 @@
-__precompile__()
+__precompile__(true)
 
 module ModifiedHankelFunctionsOfOrderOneThird
 
@@ -46,6 +46,12 @@ These functions solve Stokes' equation ``d²u/dz² + zu = 0`` as a power series 
 `abs2(z) < 36` and an approximate asymptotic expansion otherwise. The asymptotic solution is
 necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
 
+!!! warning
+
+    For very large arguments `z`, the exponential function called within the asymptotic expansion
+    may overflow and return `Inf`, `Nan`, or 0 values. No warnings will be thrown from this
+    module or Base for finite precision issues.
+
 For more information, see [^SCL1945].
 
 See also: [`powerseries`](@ref), [`asymptotic`](@ref)
@@ -73,6 +79,26 @@ function modifiedhankel(z)
     end
 
     return h1, h2, h1p, h2p
+end
+
+function checkinput(z::Complex{Float64})
+    """
+    asymptotic will return NaN or 0.0 because`exp` will overflow for Float64 arguments after
+    being raised to the 3/2 power. In particular, the variable `e2` is:
+        e2 = exp(2im/3*z^(3/2) - 5im*π/12)
+    There is a similar expression for `e3`.
+
+    Working backwards from `log(prevfloat(typemax(Float64))) ≈ 700`, we can solve for `z`
+    and get `z = 51.653 - 89.47im` which has an `abs2` of approximately 10000.
+    """
+
+    arg = 2im/3*sqrt(z)^3
+    testval = exp(arg)
+
+    if isinf(testval) || isnan(testval) || (!iszero(arg) & iszero(testval))
+        @warn "Special functions within asymptotic expansion will wrap or overflow on
+            Float64 $z. Try using `big(z)`."
+    end
 end
 
 """
