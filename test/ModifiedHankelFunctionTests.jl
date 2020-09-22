@@ -123,13 +123,25 @@ end
 end
 
 @testset "Asymptotic expansion" begin
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(1) ≈ 0.10416666666666667
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(2) ≈ 0.08355034722222222
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(5) ≈ 0.88162726744375765
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(7) ≈ 14.9957629868626
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(8)) ≈ 78.923013011587
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(11)) ≈ 24086.5496
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(14)) ≈ 17484377.0
+    # From Table 2, SCL1945
+
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(1) == 0.10416666666666667
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(2) == 0.08355034722222222
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(3) == 0.12822657455632716
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(4) == 0.29184902646414046
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(5) == 0.88162726744375765
+
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(6) ≈ 3.321408281862768 atol=1e-14
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(7) ≈ 14.9957629868626 atol=1e-12
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(8)) ≈ 78.923013011587 atol=1e-11
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(9)) ≈ 474.451538868 atol=1e-8
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(10)) ≈ 3207.490091 atol=1e-5
+
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(11)) ≈ 24086.5496 atol=1e-3
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(12)) ≈ 198923.12 atol=1e-1
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(13)) ≈ 1791902.0 atol=1
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(14)) ≈ 17484377. atol=1
+
     @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(25)) ≈ 7.3900049415704853993e+19
 end
 
