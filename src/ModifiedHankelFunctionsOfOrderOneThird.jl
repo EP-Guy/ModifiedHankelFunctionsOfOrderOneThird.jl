@@ -32,8 +32,8 @@ d(m) = m == 0 ? d₀ : -d(m-1)/((3m-2)*3m)
 const dvec = @SVector [d(i) for i = 0:NUMTERMS]
 
 Cterm(m) = 9*(2m - 1)^2 - 4
-C(m)::Float64 = prod(Cterm, 1:m)/(2^(4m)*3^m*factorial(m))
-const Cvec = @SVector [C(BigInt(i)) for i = 1:NUMTERMS]
+C(m) = convert(Float64, prod(Cterm, 1:m)/(2^(4m)*3^m*factorial(m)))
+const Cvec = @SVector [C(big(i)) for i = 1:NUMTERMS]  # `big` required for `factorial`
 
 
 """
@@ -95,17 +95,18 @@ See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
 function powerseries(z)
     # Auxiliary functions
     # The zeroth terms (a₀, b₀, c₀, d₀)
-    fval = oftype(z, avec[1])
-    gval = oftype(z, bvec[1])
-    f′val = oftype(z, cvec[1])
-    g′val = oftype(z, dvec[1])
+    fT = float(typeof(z))  # in case z is an Integer
+    fval = convert(fT, avec[1])
+    gval = convert(fT, bvec[1])
+    f′val = convert(fT, cvec[1])
+    g′val = convert(fT, dvec[1])
 
     z² = z^2
-    zterm = z²*z # z³
-    zpow = one(z)
+    z³ = z²*z  # z³
+    zpow = one(z³)
     @inbounds for i = 2:NUMTERMS
         # TODO: Stop interations based on accuracy/convergence criteria
-        zpow *= zterm  # for z^(3i)
+        zpow *= z³  # for z^(3i)
         fval += avec[i]*zpow
         gval += bvec[i]*zpow
         f′val += cvec[i]*zpow
@@ -114,7 +115,7 @@ function powerseries(z)
     gval *= z
     f′val *= -z²
 
-    isqrt3over3 = im*sqrt(3)/3
+    isqrt3over3 = 1im*sqrt(3)/3
     k1 = isqrt3over3*(gval - 2*fval)
     k2 = isqrt3over3*(g′val - 2*f′val)
 
@@ -143,16 +144,16 @@ See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
     The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
     order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 """
-function asymptotic(z::T) where T
+function asymptotic(z)
     α = cbrt(2)*3^(1/6)/sqrt(π)
     rootz = sqrt(z)
     rootz_cubed = rootz*z  # z^(3/2)
 
     zinv = inv(z)
-    zterm = im/rootz_cubed  # im*z^(-3/2)
+    zterm = 1im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
-    cT = complex(T)
+    cT = complex(float(typeof(z)))  # in case z is an Integer
     zpower = one(cT)
     negative_zpower = one(cT)
     s = one(cT)
@@ -177,9 +178,9 @@ function asymptotic(z::T) where T
     tp *= k1  # yes, same for both
 
     tmpa = α/sqrt(rootz)  # α*z^(-1/4)
-    k2 = 2/3*im*rootz_cubed
-    tmpb = k2 - 5π*im/12
-    tmpc = k2 + 11π*im/12
+    k2 = 2im/3*rootz_cubed
+    tmpb = k2 - 5im*π/12
+    tmpc = k2 + 11im*π/12
     k3 = zinv/4  # 1/4/z
 
     e2 = exp(tmpb)  # exp(-tmpb) = 1/exp(tmpb)
