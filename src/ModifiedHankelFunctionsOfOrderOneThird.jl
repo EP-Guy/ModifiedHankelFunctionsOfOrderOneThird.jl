@@ -4,6 +4,7 @@ module ModifiedHankelFunctionsOfOrderOneThird
 
 using SpecialFunctions
 using StaticArrays
+using BetterExp
 using Markdown
 using Documenter
 
@@ -141,9 +142,8 @@ function powerseries(z)
     gval *= z
     f′val *= -z²
 
-    isqrt3over3 = 1im*sqrt(3)/3
-    k1 = isqrt3over3*(gval - 2*fval)
-    k2 = isqrt3over3*(g′val - 2*f′val)
+    k1 = 1im*sqrt(3)/3*(gval - 2*fval)
+    k2 = 1im*sqrt(3)/3*(g′val - 2*f′val)
 
     h1 = gval + k1
     h2 = gval - k1
@@ -213,8 +213,8 @@ function asymptotic(z)
     e2inv = inv(e2)
     h1 = e2*s
     h2 = t*e2inv
-    h1p = e2*(s*(im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
-    h2p = (t*(-im*rootz - k3) + tp)*e2inv
+    h1p = e2*(s*(1im*rootz - k3) + sp) # rootz*z^(-1/4) = z^(1/4)
+    h2p = (t*(-1im*rootz - k3) + tp)*e2inv
 
     e3 = exp(tmpc)  # exp(-tmpc) = 1/exp(tmpc)
     e3inv = inv(e3)
