@@ -84,26 +84,6 @@ function modifiedhankel(z)
     return h1, h2, h1p, h2p
 end
 
-function checkinput(z::Complex{Float64})
-    """
-    asymptotic will return NaN or 0.0 because`exp` will overflow for Float64 arguments after
-    being raised to the 3/2 power. In particular, the variable `e2` is:
-        e2 = exp(2im/3*z^(3/2) - 5im*π/12)
-    There is a similar expression for `e3`.
-
-    Working backwards from `log(prevfloat(typemax(Float64))) ≈ 700`, we can solve for `z`
-    and get `z = 51.653 - 89.47im` which has an `abs2` of approximately 10000.
-    """
-
-    arg = 2im/3*sqrt(z)^3
-    testval = exp(arg)
-
-    if isinf(testval) || isnan(testval) || (!iszero(arg) & iszero(testval))
-        @warn "Special functions within asymptotic expansion will wrap or overflow on
-            Float64 $z. Try using `big(z)`."
-    end
-end
-
 """
     powerseries(z)
 
