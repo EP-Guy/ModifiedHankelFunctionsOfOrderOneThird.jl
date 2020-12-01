@@ -13,7 +13,7 @@ export modifiedhankel
 # Number of terms to sum in both `powerseries` and `asymptotic` solutions
 # Larger `NUMTERMS` generate successively smaller values, but can lead to floating point
 # errors when multiplied against successively larger powers of `z`.
-const NUMTERMS = 30
+const NUMTERMS = 20
 
 # Series for auxiliary functions `f`, `f′`, `g`, and `g′` in `powerseries`.
 const a₀ = cbrt(2)/gamma(2/3)
@@ -34,8 +34,10 @@ const dvec = @SVector [d(i) for i = 0:NUMTERMS]
 
 Cterm(m) = 9*(2m - 1)^2 - 4
 C(m) = convert(Float64, prod(Cterm, 1:m)/(2^(4m)*3^m*factorial(m)))
-const Cvec = @SVector [C(big(i)) for i = 1:NUMTERMS]  # `big` required for `factorial`
-
+# `big` required for `factorial`; also, this begins with 1 to simplify evalpoly below
+const Cvec = @SVector [i == 0 ? 1.0 : C(big(i)) for i = 0:NUMTERMS]
+# begin with 0 to simplify evalpoly; Cvec[i+1] to offset from the 0 term of Cvec
+const Cveci = @SVector [i == 0 ? 0.0 : Cvec[i+1]*i for i = 0:NUMTERMS]
 
 """
     modifiedhankel(z)
@@ -120,25 +122,15 @@ See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
     order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 """
 function powerseries(z)
-    # Auxiliary functions
-    # The zeroth terms (a₀, b₀, c₀, d₀)
-    fT = float(typeof(z))  # in case z is an Integer
-    fval = convert(fT, avec[1])
-    gval = convert(fT, bvec[1])
-    f′val = convert(fT, cvec[1])
-    g′val = convert(fT, dvec[1])
-
     z² = z^2
     z³ = z²*z  # z³
-    zpow = one(z³)
-    @inbounds for i = 2:NUMTERMS
-        # TODO: Stop interations based on accuracy/convergence criteria
-        zpow *= z³  # for z^(3i)
-        fval += avec[i]*zpow
-        gval += bvec[i]*zpow
-        f′val += cvec[i]*zpow
-        g′val += dvec[i]*zpow
-    end
+
+    # Auxiliary functions, beginning with zeroth terms (a₀, b₀, c₀, d₀)
+    fval = evalpoly(z³, avec.data)
+    gval = evalpoly(z³, bvec.data)
+    f′val = evalpoly(z³, cvec.data)
+    g′val = evalpoly(z³, dvec.data)
+
     gval *= z
     f′val *= -z²
 
@@ -179,26 +171,12 @@ function asymptotic(z)
     zterm = 1im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
-    cT = complex(float(typeof(z)))  # in case z is an Integer
-    zpower = one(cT)
-    negative_zpower = one(cT)
-    s = one(cT)
-    t = one(cT)
-    sp = zero(cT)
-    tp = zero(cT)
-    @inbounds for i = 1:NUMTERMS
-        # TODO: Stop interations based on accuracy/convergence criteria
-        zpower *= zterm
-        negative_zpower *= negative_zterm
+    # First term manually specified
+    s = evalpoly(negative_zterm, Cvec.data)
+    t = evalpoly(zterm, Cvec.data)
+    sp = evalpoly(negative_zterm, Cveci.data)
+    tp = evalpoly(zterm, Cveci.data)
 
-        tmp1 = Cvec[i]*negative_zpower
-        tmp2 = Cvec[i]*zpower
-
-        s += tmp1
-        t += tmp2
-        sp += tmp1*i
-        tp += tmp2*i
-    end
     k1 = -3/2*zterm*zinv  # -3/2*im*z^(-5/2)
     sp *= k1
     tp *= k1  # yes, same for both
@@ -221,10 +199,10 @@ function asymptotic(z)
     argz = angle(z)
     if -4π/3 < argz < 0
         h1 += t*e3inv
-        h1p += (t*(-im*rootz - k3) + tp)*e3inv
+        h1p += (t*(-1im*rootz - k3) + tp)*e3inv
     else
         h2 += e3*s
-        h2p += e3*(s*(im*rootz - k3) + sp)
+        h2p += e3*(s*(1im*rootz - k3) + sp)
     end
 
     h1 *= tmpa
