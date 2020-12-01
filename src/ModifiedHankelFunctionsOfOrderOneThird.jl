@@ -13,7 +13,7 @@ export modifiedhankel
 # Number of terms to sum in both `powerseries` and `asymptotic` solutions
 # Larger `NUMTERMS` generate successively smaller values, but can lead to floating point
 # errors when multiplied against successively larger powers of `z`.
-const NUMTERMS = 30
+const NUMTERMS = 20
 
 # Series for auxiliary functions `f`, `f′`, `g`, and `g′` in `powerseries`.
 const a₀ = cbrt(2)/gamma(2/3)
