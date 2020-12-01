@@ -3,7 +3,7 @@ using ModifiedHankelFunctionsOfOrderOneThird
 using SpecialFunctions
 using BetterExp
 
-@testset "Zeros of h₂" begin
+@testset "Power series: zeros of h₂" begin
     h1, h2, h1p, h2p = modifiedhankel(complex(-1.16905371, 2.02486041))
     @test h1 ≈ complex(-0.34342750, 0.59483387)
     @test h1p ≈ complex(-0.06957489, -1.06099210)
@@ -20,7 +20,7 @@ using BetterExp
     @test h2p ≈ complex(-2.26747600, 1.30912788)
 end
 
-@testset "Zeros of h₂′" begin
+@testset "Power series: zeros of h₂′" begin
     h1, h2, h1p, h2p = modifiedhankel(complex(-0.50939649, 0.88230059))
     @test h1 ≈ complex(-0.63166599, -0.52691131)
     @test h2 ≈ complex(0, 1.62098891)
@@ -37,7 +37,7 @@ end
     @test h1p ≈ complex(1.26609349, 0)
 end
 
-@testset "Spot checks" begin
+@testset "Power series: spot checks" begin
     h1, h2, h1p, h2p = modifiedhankel(complex(2., 0.))
     @test h1 ≈ complex(0.60991262, 0.36822576)
     @test h1p ≈ complex(-0.59922801, 0.83306447)

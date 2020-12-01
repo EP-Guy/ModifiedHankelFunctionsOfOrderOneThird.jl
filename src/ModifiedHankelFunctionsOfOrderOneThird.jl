@@ -120,25 +120,15 @@ See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
     order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
 """
 function powerseries(z)
-    # Auxiliary functions
-    # The zeroth terms (a₀, b₀, c₀, d₀)
-    fT = float(typeof(z))  # in case z is an Integer
-    fval = convert(fT, avec[1])
-    gval = convert(fT, bvec[1])
-    f′val = convert(fT, cvec[1])
-    g′val = convert(fT, dvec[1])
-
     z² = z^2
     z³ = z²*z  # z³
-    zpow = one(z³)
-    @inbounds for i = 2:NUMTERMS
-        # TODO: Stop interations based on accuracy/convergence criteria
-        zpow *= z³  # for z^(3i)
-        fval += avec[i]*zpow
-        gval += bvec[i]*zpow
-        f′val += cvec[i]*zpow
-        g′val += dvec[i]*zpow
-    end
+
+    # Auxiliary functions, beginning with zeroth terms (a₀, b₀, c₀, d₀)
+    fval = evalpoly(z³, avec.data)
+    gval = evalpoly(z³, bvec.data)
+    f′val = evalpoly(z³, cvec.data)
+    g′val = evalpoly(z³, dvec.data)
+
     gval *= z
     f′val *= -z²
 
@@ -179,26 +169,18 @@ function asymptotic(z)
     zterm = 1im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
-    cT = complex(float(typeof(z)))  # in case z is an Integer
-    zpower = one(cT)
-    negative_zpower = one(cT)
-    s = one(cT)
-    t = one(cT)
-    sp = zero(cT)
-    tp = zero(cT)
+    # TEMP - just define as const and build in 0
+    Cveci = MVector{NUMTERMS, Float64}(undef)
     @inbounds for i = 1:NUMTERMS
-        # TODO: Stop interations based on accuracy/convergence criteria
-        zpower *= zterm
-        negative_zpower *= negative_zterm
-
-        tmp1 = Cvec[i]*negative_zpower
-        tmp2 = Cvec[i]*zpower
-
-        s += tmp1
-        t += tmp2
-        sp += tmp1*i
-        tp += tmp2*i
+        Cveci[i] = Cvec[i]*i
     end
+
+    # First term manually specified
+    s = evalpoly(negative_zterm, (1, Cvec.data...))
+    t = evalpoly(zterm, (1, Cvec.data...))
+    sp = evalpoly(negative_zterm, (0, Cveci.data...))
+    tp = evalpoly(zterm, (0, Cveci.data...))
+
     k1 = -3/2*zterm*zinv  # -3/2*im*z^(-5/2)
     sp *= k1
     tp *= k1  # yes, same for both
