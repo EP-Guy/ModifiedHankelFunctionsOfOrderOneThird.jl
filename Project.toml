@@ -1,7 +1,7 @@
 name = "ModifiedHankelFunctionsOfOrderOneThird"
 uuid = "b1c65800-dbf0-11e8-0001-4d87e1e07e69"
 authors = ["Forrest Gasdia <17058025+fgasdia@users.noreply.github.com>"]
-version = "1.0.5"
+version = "1.0.4"
 
 [deps]
 BetterExp = "7cffe744-45fd-4178-b173-cf893948b8b7"
