@@ -11,8 +11,6 @@ using Documenter
 export modifiedhankel
 
 # Number of terms to sum in both `powerseries` and `asymptotic` solutions
-# Larger `NUMTERMS` generate successively smaller values, but can lead to floating point
-# errors when multiplied against successively larger powers of `z`.
 const NUMTERMS = 20
 
 # Series for auxiliary functions `f`, `f′`, `g`, and `g′` in `powerseries`.
@@ -51,9 +49,9 @@ necessary because the ``z³ⁱ`` in the power series blows up as ``i → ∞``.
 
 !!! warning
 
-    For very large arguments `z`, the exponential function called within the asymptotic expansion
-    may overflow and return `Inf`, `Nan`, or 0 values. No warnings will be thrown from this
-    module or Base for finite precision issues.
+    For very large arguments `z`, the exponential function called within the asymptotic
+    expansion may overflow and return `Inf`, `Nan`, or `0` values. No warnings will be
+    thrown from this module or Base for floating point issues.
 
 For more information, see [^SCL1945].
 
@@ -88,7 +86,7 @@ end
     powerseries(z)
 
 Return ``h₁``, ``h₂``, ``h₁'``, and ``h₂'``, the first and second modified Hankel functions
-of order 1/3 and their derivatives using a *power series* with 30 terms.
+of order 1/3 and their derivatives using a *power series* with 20 terms.
 
 For more information, see [^SCL1945].
 
@@ -151,7 +149,6 @@ function asymptotic(z)
     zterm = 1im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
-    # First term manually specified
     s = evalpoly(negative_zterm, Cvec.data)
     t = evalpoly(zterm, Cvec.data)
     sp = evalpoly(negative_zterm, Cveci.data)
