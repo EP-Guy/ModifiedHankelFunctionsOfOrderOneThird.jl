@@ -69,8 +69,8 @@ julia> h1, h2, h1prime, h2prime = modifiedhankel(complex(2.687, -0.648));
 
 [^SCL1945]:
 
-    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
+    The Staff of the Computation Library (1945), Tables of the modified Hankel function of
+    order one-third and of their derivatives. Cambridge, MA: Harvard University Press.
 """
 function modifiedhankel(z)
     if abs2(z) < 36
@@ -118,8 +118,8 @@ See also: [`modifiedhankel`](@ref), [`asymptotic`](@ref)
 
 [^SCL1945]:
 
-    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
+    The Staff of the Computation Library (1945), Tables of the modified Hankel function of
+    order one-third and of their derivatives. Cambridge, MA: Harvard University Press.
 """
 function powerseries(z)
     z² = z^2
@@ -159,8 +159,8 @@ See also: [`modifiedhankel`](@ref), [`powerseries`](@ref)
 
 [^SCL1945]:
 
-    The Staff of the Computation Library (1945), *Tables of the modified Hankel function of
-    order one-third and of their derivatives.* Cambridge, MA: Harvard University Press.
+    The Staff of the Computation Library (1945), Tables of the modified Hankel function of
+    order one-third and of their derivatives. Cambridge, MA: Harvard University Press.
 """
 function asymptotic(z)
     α = cbrt(2)*3^(1/6)/sqrt(π)
