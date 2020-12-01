@@ -34,8 +34,10 @@ const dvec = @SVector [d(i) for i = 0:NUMTERMS]
 
 Cterm(m) = 9*(2m - 1)^2 - 4
 C(m) = convert(Float64, prod(Cterm, 1:m)/(2^(4m)*3^m*factorial(m)))
-const Cvec = @SVector [C(big(i)) for i = 1:NUMTERMS]  # `big` required for `factorial`
-
+# `big` required for `factorial`; also, this begins with 1 to simplify evalpoly below
+const Cvec = @SVector [i == 0 ? 1.0 : C(big(i)) for i = 0:NUMTERMS]
+# begin with 0 to simplify evalpoly; Cvec[i+1] to offset from the 0 term of Cvec
+const Cveci = @SVector [i == 0 ? 0.0 : Cvec[i+1]*i for i = 0:NUMTERMS]
 
 """
     modifiedhankel(z)
@@ -169,17 +171,11 @@ function asymptotic(z)
     zterm = 1im/rootz_cubed  # im*z^(-3/2)
     negative_zterm = -zterm
 
-    # TEMP - just define as const and build in 0
-    Cveci = MVector{NUMTERMS, Float64}(undef)
-    @inbounds for i = 1:NUMTERMS
-        Cveci[i] = Cvec[i]*i
-    end
-
     # First term manually specified
-    s = evalpoly(negative_zterm, (1, Cvec.data...))
-    t = evalpoly(zterm, (1, Cvec.data...))
-    sp = evalpoly(negative_zterm, (0, Cveci.data...))
-    tp = evalpoly(zterm, (0, Cveci.data...))
+    s = evalpoly(negative_zterm, Cvec.data)
+    t = evalpoly(zterm, Cvec.data)
+    sp = evalpoly(negative_zterm, Cveci.data)
+    tp = evalpoly(zterm, Cveci.data)
 
     k1 = -3/2*zterm*zinv  # -3/2*im*z^(-5/2)
     sp *= k1
@@ -203,10 +199,10 @@ function asymptotic(z)
     argz = angle(z)
     if -4π/3 < argz < 0
         h1 += t*e3inv
-        h1p += (t*(-im*rootz - k3) + tp)*e3inv
+        h1p += (t*(-1im*rootz - k3) + tp)*e3inv
     else
         h2 += e3*s
-        h2p += e3*(s*(im*rootz - k3) + sp)
+        h2p += e3*(s*(1im*rootz - k3) + sp)
     end
 
     h1 *= tmpa
