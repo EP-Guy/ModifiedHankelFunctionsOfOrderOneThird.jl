@@ -1,6 +1,6 @@
 # Modified Hankel Functions Of Order One Third and Their Derivatives
 
-[![Build Status](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl.svg?branch=master)](https://travis-ci.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl) [![Build status](https://ci.appveyor.com/api/projects/status/nve8a1cx0e8af7qv/branch/master?svg=true)](https://ci.appveyor.com/project/fgasdia/modifiedhankelfunctionsoforderonethird-jl/branch/master) [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814) [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://fgasdia.github.io/ModifiedHankelFunctionsOfOrderOneThird.jl/stable) [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://fgasdia.github.io/ModifiedHankelFunctionsOfOrderOneThird.jl/dev)
+[![Build status][gha-img]][gha-url] [![DOI](https://zenodo.org/badge/156012814.svg)](https://zenodo.org/badge/latestdoi/156012814) [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://fgasdia.github.io/ModifiedHankelFunctionsOfOrderOneThird.jl/stable) [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://fgasdia.github.io/ModifiedHankelFunctionsOfOrderOneThird.jl/dev)
 
 
 Solutions to Stokes' differential equation:
@@ -76,3 +76,6 @@ The Staff of the Computation Library (1945), _Tables of the modified Hankel func
 
 We encourage you to cite this package if used in scientific work. See the Zenodo
 badge above or refer to [CITATION.bib](CITATION.bib).
+
+[gha-img]: https://github.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl/workflows/CI/badge.svg
+[gha-url]: https://github.com/fgasdia/ModifiedHankelFunctionsOfOrderOneThird.jl/actions?query=workflow
