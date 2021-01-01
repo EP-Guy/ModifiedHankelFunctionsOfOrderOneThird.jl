@@ -5,7 +5,6 @@ module ModifiedHankelFunctionsOfOrderOneThird
 using SpecialFunctions
 using StaticArrays
 using BetterExp
-using Markdown
 
 export modifiedhankel
 
