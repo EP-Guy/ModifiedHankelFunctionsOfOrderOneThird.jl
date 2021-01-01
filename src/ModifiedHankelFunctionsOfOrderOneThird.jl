@@ -6,7 +6,6 @@ using SpecialFunctions
 using StaticArrays
 using BetterExp
 using Markdown
-using Documenter
 
 export modifiedhankel
 
@@ -59,7 +58,7 @@ See also: [`powerseries`](@ref), [`asymptotic`](@ref)
 
 # Examples
 
-```jldoctest
+```julia
 julia> h1, h2, h1prime, h2prime = modifiedhankel(complex(2.687, -0.648));
 ```
 

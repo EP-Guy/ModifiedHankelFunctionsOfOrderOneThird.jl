@@ -2,9 +2,6 @@ push!(LOAD_PATH,"../src/")
 
 using Documenter, ModifiedHankelFunctionsOfOrderOneThird
 
-DocMeta.setdocmeta!(ModifiedHankelFunctionsOfOrderOneThird, :DocTestSetup,
-    :(using ModifiedHankelFunctionsOfOrderOneThird); recursive=true)
-
 makedocs(
     modules=[ModifiedHankelFunctionsOfOrderOneThird],
     sitename="ModifiedHankelFunctionsOfOrderOneThird.jl",
