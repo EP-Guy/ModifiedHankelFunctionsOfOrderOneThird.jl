@@ -2,6 +2,10 @@ using Test
 using ModifiedHankelFunctionsOfOrderOneThird
 using SpecialFunctions
 
+# SCL1945:
+# "Tables of the modified Hankel function of order one-third and of their derivatives"
+# Harvard University Press, 1945.
+
 @testset "Power series: zeros of h₂" begin
     h1, h2, h1p, h2p = modifiedhankel(complex(-1.16905371, 2.02486041))
     @test h1 ≈ complex(-0.34342750, 0.59483387)
