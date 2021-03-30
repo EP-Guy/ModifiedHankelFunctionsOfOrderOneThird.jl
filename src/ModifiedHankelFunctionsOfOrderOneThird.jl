@@ -4,7 +4,6 @@ module ModifiedHankelFunctionsOfOrderOneThird
 
 using SpecialFunctions
 using StaticArrays
-using BetterExp
 
 export modifiedhankel
 

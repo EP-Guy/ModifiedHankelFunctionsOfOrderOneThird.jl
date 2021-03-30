@@ -1,7 +1,6 @@
 using Test
 using ModifiedHankelFunctionsOfOrderOneThird
 using SpecialFunctions
-using BetterExp
 
 @testset "Power series: zeros of h₂" begin
     h1, h2, h1p, h2p = modifiedhankel(complex(-1.16905371, 2.02486041))
