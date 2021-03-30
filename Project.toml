@@ -4,12 +4,10 @@ authors = ["Forrest Gasdia <17058025+fgasdia@users.noreply.github.com>"]
 version = "1.1.1"
 
 [deps]
-BetterExp = "7cffe744-45fd-4178-b173-cf893948b8b7"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
-BetterExp = "0.1"
 SpecialFunctions = "0.10, 1"
 StaticArrays = "0.12, 1"
 julia = "1.4"

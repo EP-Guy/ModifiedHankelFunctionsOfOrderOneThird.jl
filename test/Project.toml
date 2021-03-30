@@ -1,8 +1,6 @@
 [deps]
-BetterExp = "7cffe744-45fd-4178-b173-cf893948b8b7"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-BetterExp = "0.1"
 SpecialFunctions = "0.10, 1"

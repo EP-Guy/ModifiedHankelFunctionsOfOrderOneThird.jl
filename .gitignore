@@ -1,2 +1,3 @@
 *.mlx
 /docs/build/
+Manifest.toml
