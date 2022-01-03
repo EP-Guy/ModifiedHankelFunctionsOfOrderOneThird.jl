@@ -41,7 +41,7 @@ end
 end
 
 @testset "Power series: spot checks" begin
-    h1, h2, h1p, h2p = modifiedhankel(complex(2., 0.))
+    h1, h2, h1p, h2p = modifiedhankel(complex(2.0, 0.0))
     @test h1 ≈ complex(0.60991262, 0.36822576)
     @test h1p ≈ complex(-0.59922801, 0.83306447)
     @test h2 ≈ complex(0.60991262, -0.36822576)
@@ -144,7 +144,7 @@ end
     @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(11)) ≈ 24086.5496 atol=1e-3
     @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(12)) ≈ 198923.12 atol=1e-1
     @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(13)) ≈ 1791902.0 atol=1
-    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(14)) ≈ 17484377. atol=1
+    @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(14)) ≈ 17484377 atol=1
 
     @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(25)) ≈ 7.3900049415704853993e+19
 end
