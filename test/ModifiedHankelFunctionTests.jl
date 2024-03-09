@@ -47,6 +47,12 @@ end
     @test h2 ≈ complex(0.60991262, -0.36822576)
     @test h2p ≈ complex(-0.59922801, -0.83306447)
 
+    h1, h2, h1p, h2p = modifiedhankel(complex(big(2.0), 0.0))
+    @test h1 ≈ complex(0.60991262, 0.36822576)
+    @test h1p ≈ complex(-0.59922801, 0.83306447)
+    @test h2 ≈ complex(0.60991262, -0.36822576)
+    @test h2p ≈ complex(-0.59922801, -0.83306447)
+
     h1, h2, h1p, h2p = modifiedhankel(complex(4.5, 2.2))
     @test h1 ≈ complex(-0.00170177, -0.00480825) atol=1e-7
     @test h1p ≈ complex(0.01152459, -0.00111977) atol=1e-7
@@ -148,3 +154,52 @@ end
 
     @test ModifiedHankelFunctionsOfOrderOneThird.C(BigInt(25)) ≈ 7.3900049415704853993e+19
 end
+
+# z = complex.(-10:0.05:10, -20:0.1:20)
+z = complex.(-5:0.05:20, 0)
+o = modifiedhankel.(z)
+h1 = getindex.(o, 1)
+plot(real(z), real(h1), label="real")
+plot!(real(z), imag(h1), label="imag", xlims=(-5, 20), ylims=(-10, 5))
+
+# bigz = complex.(-10:big(0.05):10, -20:big(0.1):20)
+bigz = complex.(-5:big(0.05):20, 0)
+bigo = modifiedhankel.(bigz)
+big_h1 = getindex.(bigo, 1)
+plot!(real(bigz), real(big_h1), label="big_real")
+plot!(real(bigz), imag(big_h1), label="big_imag")
+
+
+z = complex.(0,-5:0.05:10)
+o = modifiedhankel.(z)
+h1 = getindex.(o, 1)
+plot(imag(z), real(h1), label="real")
+plot!(imag(z), imag(h1), label="imag", xlims=(-5, 10), ylims=(-10, 10))
+
+bigz = complex.(0, -5:big(0.05):10)
+bigo = modifiedhankel.(bigz)
+big_h1 = getindex.(bigo, 1)
+plot!(imag(bigz), real(big_h1), label="big_real")
+plot!(imag(bigz), imag(big_h1), label="big_imag")
+
+q0 = @. ((2/6378e3)/104e-6)^(-2/3) * cos(deg2rad(89-(1:30)*im))^2
+
+o = modifiedhankel.(q0)
+h1 = getindex.(o, 1)
+plot(abs2.(q0), real(h1), label="real")
+plot!(abs2.(q0), imag(h1), label="imag", xlims=(0, 200), ylims=(-100, 100))
+
+bigq0 = @. ((2/6378e3)/104e-6)^(-2/3) * cos(deg2rad(big(89)-(1:30)*im))^2
+bigo = modifiedhankel.(bigq0)
+big_h1 = getindex.(bigo, 1)
+plot!(abs2.(bigq0), real(big_h1), label="big_real")
+plot!(abs2.(bigq0), imag(big_h1), label="big_imag", xlims=(0, 200), ylims=(-1e8, 1e10))
+
+real(bigq0) ≈ real(q0)
+imag(bigq0) ≈ imag(q0)
+
+q0 = @. ((2/6378e3)/104e-6)^(-2/3) * cos(deg2rad(10-(1:30)*im))^2
+o = modifiedhankel.(q0)
+h1 = getindex.(o, 1)
+plot(abs2.(q0), real(h1), label="real")
+plot!(abs2.(q0), imag(h1), label="imag", xlims=(2000, 4000), ylims=(-0.1, 0.1))
